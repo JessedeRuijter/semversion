@@ -146,8 +146,8 @@ class SemanticVersion:
     def __compare_tuple(v: SemanticVersion, v_length: int) -> tuple:
         ct = (
             v.major,
-            v.minor or math.inf,
-            v.patch or math.inf,
+            v.minor if v.minor is not None else math.inf,
+            v.patch if v.patch is not None else math.inf,
             *pad(v.versions, v_length, math.inf),
             pre_release_type_to_int(v.pre_release_type) or math.inf
             if not v.post_release and not v.dev_release
